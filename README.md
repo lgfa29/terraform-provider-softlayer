@@ -4,7 +4,7 @@
 
 ## Install
 
-[Download the binary](https://github.com/softlayer/terraform-provider-softlayer/releases) of the provider.
+[Download the binary](https://github.com/lgfa29/terraform-provider-softlayer/releases) of the provider.
 
 Create or edit this file to specify the location of the terraform softlayer provider binary:
 
@@ -27,14 +27,14 @@ Go to the [documentation directory](docs/).
 1. Ensure you have _$GOPATH/bin_ in your _$PATH_ (e.g. `export PATH=$GOPATH/bin:PATH`).
 1. Install _terraform-provider-softlayer_.
 ```
-$ go get -u github.com/softlayer/terraform-provider-softlayer
+$ go get -u github.com/lgfa29/terraform-provider-softlayer
 ```
 1. Get the main dependency:
 ```
 $ go get github.com/hashicorp/terraform
 ```
 
-The project will exist at `$GOPATH/src/github.com/softlayer/terraform-provider-softlayer`.
+The project will exist at `$GOPATH/src/github.com/lgfa29/terraform-provider-softlayer`.
 
 ### Build
 
