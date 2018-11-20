@@ -698,6 +698,7 @@ func resourceSoftLayerVirtualGuestRead(d *schema.ResourceData, meta interface{})
 			"dedicatedHost[id,name]," +
 			"primaryIpAddress,primaryBackendIpAddress,privateNetworkOnlyFlag," +
 			"operatingSystemReferenceCode,blockDeviceTemplateGroup[id]," +
+			"blockDevices[id,diskImage[capacity,units,type[keyName]]]," +
 			"hourlyBillingFlag,localDiskFlag," +
 			"notes,userData[value],tagReferences[id,tag[name]]," +
 			"datacenter[id,name,longName]," +
@@ -724,6 +725,16 @@ func resourceSoftLayerVirtualGuestRead(d *schema.ResourceData, meta interface{})
 		if _, ok := d.GetOk("os_reference_code"); !ok {
 			d.Set("os_reference_code", *result.OperatingSystemReferenceCode)
 		}
+	}
+
+	if result.BlockDevices != nil && len(result.BlockDevices) > 0 {
+		disks := make([]int, 0)
+		for _, disk := range result.BlockDevices {
+			if *disk.DiskImage.Type.KeyName == "SYSTEM" && *disk.DiskImage.Units == "GB" {
+				disks = append(disks, *disk.DiskImage.Capacity)
+			}
+		}
+		d.Set("disks", disks)
 	}
 
 	if result.Datacenter != nil {
